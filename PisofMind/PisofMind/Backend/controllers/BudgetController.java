@@ -2,7 +2,7 @@ package com.org.PisofMind.controllers;
 
 import com.org.PisofMind.dtos.BudgetResponse;
 import com.org.PisofMind.dtos.SetBudgetRequest;
-import com.org.PisofMind.services.BudgetService;
+import com.org.PisofMind.services.BudgetServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class BudgetController {
 
-    private final BudgetService budgetService;
+    private final BudgetServicePort budgetService;
 
     /**
      * Set budget for a user.
