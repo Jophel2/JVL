@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class BudgetService {
+public class BudgetService implements BudgetServicePort {
 
     private final UserRepository userRepository;
     private final CategoryBudgetRepository categoryBudgetRepository;
@@ -57,15 +57,23 @@ public class BudgetService {
             throw new IllegalArgumentException("Budget must be greater than 0");
         }
 
+        if (request.getBudgetPeriod() == null) {
+            throw new IllegalArgumentException("Budget period is required");
+        }
+
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new IllegalStateException("User not found"));
 
         CategoryBudget categoryBudget = categoryBudgetRepository
                 .findByUserIdAndCategory(user.getId(), request.getCategory())
-                .orElseGet(() -> new CategoryBudget(null, user, request.getCategory(), request.getBudget()));
+                .map(existingBudget -> {
+                    existingBudget.setBudget(existingBudget.getBudget().add(request.getBudget()));
+                    existingBudget.setPeriod(request.getBudgetPeriod());
+                    return existingBudget;
+                })
+                .orElseGet(() -> new CategoryBudget(null, user, request.getCategory(), request.getBudgetPeriod(), request.getBudget()));
 
-        categoryBudget.setBudget(request.getBudget());
-        categoryBudgetRepository.save(categoryBudget);
+        categoryBudget = categoryBudgetRepository.saveAndFlush(categoryBudget);
 
         BigDecimal totalBudget = calculateTotalBudget(user);
         user.setBudget(totalBudget);
@@ -113,7 +121,7 @@ public class BudgetService {
                 .map(cb -> {
                     BigDecimal spent = spentByCategory.getOrDefault(cb.getCategory(), BigDecimal.ZERO);
                     BigDecimal remaining = cb.getBudget().subtract(spent);
-                    return new CategoryBudgetResponse(cb.getCategory(), cb.getBudget(), spent, remaining);
+                    return new CategoryBudgetResponse(cb.getCategory(), cb.getBudget(), spent, remaining, cb.getPeriod());
                 })
                 .collect(Collectors.toList());
 

@@ -61,7 +61,7 @@ public class SummaryService {
         summary.put("expenseBreakdown", categoryBreakdown);
 
         // Build category summary list for frontend consumption
-        summary.put("categorySummary", buildCategorySummary(categoryBreakdown, totalSpent));
+        summary.put("categorySummary", buildCategorySummary(categoryBreakdown, user.getBudget()));
 
         // Find top spending category
         String topCategory = findTopCategory(categoryBreakdown);
@@ -113,22 +113,28 @@ public class SummaryService {
      * @param categoryBreakdown - Map of category totals
      * @return Category name with highest spending, or "N/A" if no expenses
      */
-    private List<Map<String, Object>> buildCategorySummary(Map<String, BigDecimal> categoryBreakdown, BigDecimal totalSpent) {
+    private List<Map<String, Object>> buildCategorySummary(
+            Map<String, BigDecimal> categoryBreakdown,
+            BigDecimal totalBudget) {
+
         List<Map<String, Object>> categorySummary = new ArrayList<>();
 
         for (Map.Entry<String, BigDecimal> entry : categoryBreakdown.entrySet()) {
+
             BigDecimal categoryTotal = entry.getValue();
             BigDecimal percentage = BigDecimal.ZERO;
-            if (totalSpent.compareTo(BigDecimal.ZERO) > 0) {
+
+            if (totalBudget != null && totalBudget.compareTo(BigDecimal.ZERO) > 0) {
                 percentage = categoryTotal
                         .multiply(BigDecimal.valueOf(100))
-                        .divide(totalSpent, 2, RoundingMode.HALF_UP);
+                        .divide(totalBudget, 2, RoundingMode.HALF_UP);
             }
 
             Map<String, Object> summaryItem = new HashMap<>();
             summaryItem.put("category", entry.getKey());
             summaryItem.put("total", categoryTotal);
             summaryItem.put("percentage", percentage);
+
             categorySummary.add(summaryItem);
         }
 
