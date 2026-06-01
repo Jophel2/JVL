@@ -15,7 +15,7 @@ Succesfully created a starting files for the backend of our project
 
 Backend Updates 
 Date : June 1, 2026
-Status - 
+Status -
 
 Compile all folders for frontend 
 Date : June 1, 2026
