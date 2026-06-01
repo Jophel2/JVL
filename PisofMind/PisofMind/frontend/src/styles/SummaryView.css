@@ -1,0 +1,153 @@
+.summary-view {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary-view h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.total-expenses {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.total-expenses .label {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.total-expenses .amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0;
+}
+
+.category-breakdown h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category-item {
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.category-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.category-name {
+  font-weight: 600;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.category-amount {
+  font-weight: 700;
+  color: #4CAF50;
+}
+
+.category-percentage {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.percentage-bar {
+  flex: 1;
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.percentage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.percentage-text {
+  min-width: 45px;
+  text-align: right;
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.summary-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.rank-card,
+.budget-status {
+  border: 1px solid #e8e8f4;
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: #f9faff;
+}
+
+.rank-card .label,
+.budget-status .label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.rank-card h4 {
+  margin: 0;
+  font-size: 1.9rem;
+  color: #2d2d72;
+}
+
+.rank-message,
+.status-text,
+.top-category-text {
+  margin: 0.75rem 0 0;
+  color: #555;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.budget-status.over-budget {
+  border-color: #f8d7da;
+  background: #fff1f2;
+}
+
+.budget-status.under-budget {
+  border-color: #d1e7dd;
+  background: #f4fbf7;
+}
+
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 2rem 1rem;
+}
