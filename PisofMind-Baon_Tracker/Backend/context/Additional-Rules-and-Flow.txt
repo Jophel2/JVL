@@ -1,0 +1,22 @@
+PisofMind — Project Rules
+
+1. Write clean, readable, and properly named code
+2. Validate all user inputs on both client and server
+3. Keep user data secure — never expose or hardcode credentials
+4. Follow consistent UI design across all screens
+5. Fix bugs immediately when discovered
+6. Commit code regularly with clear, descriptive messages
+7. Update the changelog after every change
+8.Test every feature before merging or submitting
+9. Ask for team confirmation before making major changes
+10. Never modify another student's expense or rank data
+
+
+PisofMind — Way of Working
+
+1. Plan the feature before writing any code
+2. Design the UI first, then build frontend and backend step by step
+3. Test every functionality after implementation
+4. Review the feature with the team before merging
+5. Update documentation after every change
+6. Deploy only stable, tested, and reviewed features

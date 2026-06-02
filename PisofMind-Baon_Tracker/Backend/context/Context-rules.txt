@@ -1,0 +1,796 @@
+# PisofMind — Vibe Coding Context & Engineering Guide
+
+Use this as the official engineering mindset, coding philosophy, and implementation guide for the project.
+
+---
+
+# Project Identity
+
+## App Name
+
+**PisofMind**
+
+## Core Mission
+
+Help students develop healthy financial habits by:
+
+* Tracking school-related expenses
+* Managing budgets
+* Preventing overspending
+* Encouraging discipline through gamification
+
+---
+
+# Engineering Philosophy
+
+## Primary Goal
+
+Build a:
+
+* Simple
+* Stable
+* Maintainable
+* Understandable
+* Beginner-friendly
+
+system before building a “complex” system.
+
+---
+
+# Core Engineering Mindset
+
+## Build Like a Professional Team
+
+Every feature should be:
+
+* Modular
+* Reusable
+* Testable
+* Easy to debug
+* Easy to extend
+
+---
+
+# Golden Rule
+
+> “If another developer reads this code after 6 months, they should immediately understand it.”
+
+---
+
+# Technical Philosophy
+
+# Prioritize These FIRST
+
+| Priority | Principle              |
+| -------- | ---------------------- |
+| HIGH     | Readability            |
+| HIGH     | Simplicity             |
+| HIGH     | Separation of concerns |
+| HIGH     | Maintainability        |
+| HIGH     | Consistency            |
+| MEDIUM   | Scalability            |
+| LOW      | Premature optimization |
+
+---
+
+# DO NOT OVERENGINEER
+
+Avoid:
+
+* Microservices
+* CQRS
+* Event sourcing
+* Complex generics
+* Overuse of inheritance
+* “Smart” code nobody understands
+
+For MVP:
+
+* Simple layered architecture is enough
+* Simple CRUD is enough
+* Simple service logic is enough
+
+---
+
+# PisofMind OOP Principles Guide
+
+# 1. Single Responsibility Principle (MOST IMPORTANT)
+
+Each class should have ONE responsibility.
+
+---
+
+# Good Example
+
+## ExpenseService
+
+ONLY handles:
+
+* Creating expenses
+* Updating expenses
+* Deleting expenses
+
+---
+
+## BudgetService
+
+ONLY handles:
+
+* Budget calculations
+* Budget validation
+
+---
+
+# Bad Example
+
+```text id="n7zj5i"
+FinanceManager
+- login()
+- createExpense()
+- calculateBudget()
+- sendNotification()
+- generateReports()
+```
+
+Too many responsibilities.
+
+---
+
+# PisofMind Rule
+
+If a class name contains:
+
+* Manager
+* Processor
+* UtilityGod
+* HandlerEverything
+
+…it is probably violating SRP.
+
+---
+
+# 2. Keep Controllers Thin
+
+Controllers should ONLY:
+
+1. Receive requests
+2. Validate request structure
+3. Call services
+4. Return responses
+
+---
+
+# Good Controller
+
+```java id="bjgzvm"
+@PostMapping
+public ExpenseResponse createExpense(
+        @RequestBody ExpenseRequest request
+) {
+    return expenseService.createExpense(request);
+}
+```
+
+---
+
+# Bad Controller
+
+```java id="6o5g2d"
+@PostMapping
+public ExpenseResponse createExpense() {
+
+    // validation
+    // budget calculation
+    // ranking update
+    // database logic
+    // email logic
+}
+```
+
+Business logic does NOT belong here.
+
+---
+
+# 3. Services Own Business Logic
+
+ALL business rules belong inside services.
+
+---
+
+# Good
+
+```text id="j1qlp9"
+ExpenseService
+- validateExpense()
+- calculateRemainingBudget()
+- createExpense()
+```
+
+---
+
+# DO NOT Put Logic Inside
+
+* Controllers
+* React components
+* Repositories
+* Entities
+
+---
+
+# 4. Repositories ONLY Access Data
+
+Repositories should:
+
+* Save
+* Delete
+* Query
+
+ONLY.
+
+---
+
+# Good
+
+```java id="zkfyg8"
+expenseRepository.findByUserId(userId);
+```
+
+---
+
+# Bad
+
+```java id="6h1l2t"
+expenseRepository.calculateBudgetAndRank();
+```
+
+Repositories should NOT contain business logic.
+
+---
+
+# 5. DTOs are REQUIRED
+
+Never expose entities directly to APIs.
+
+---
+
+# Good Structure
+
+```text id="y7a04o"
+ExpenseEntity
+ExpenseRequestDTO
+ExpenseResponseDTO
+```
+
+---
+
+# Why?
+
+DTOs:
+
+* Protect database structure
+* Prevent accidental leaks
+* Allow API flexibility
+* Improve maintainability
+
+---
+
+# 6. Use Clear Naming
+
+# Good Names
+
+```text id="t6vjg4"
+ExpenseService
+BudgetSummaryResponse
+CreateExpenseRequest
+```
+
+---
+
+# Bad Names
+
+```text id="tr1u29"
+Manager
+Handler
+Data
+ProcessThing
+```
+
+---
+
+# PisofMind Naming Rule
+
+A class name should explain:
+
+* WHAT it is
+* WHAT it does
+
+without opening the file.
+
+---
+
+# 7. Keep Methods Small
+
+Each method should do ONE thing.
+
+---
+
+# Good
+
+```java id="fjh3xs"
+validateBudget()
+calculateRemainingBalance()
+updateUserBadge()
+```
+
+---
+
+# Bad
+
+```java id="w9jlwm"
+createExpenseAndCalculateBudgetAndUpdateBadgeAndNotifyUser()
+```
+
+Split responsibilities.
+
+---
+
+# 8. Use Composition Over Inheritance
+
+Avoid deep inheritance trees.
+
+---
+
+# BAD
+
+```text id="bqvk8n"
+User
+ └── Student
+      └── SaverStudent
+           └── EliteSaverStudent
+```
+
+---
+
+# BETTER
+
+```java id="2md0y2"
+class User {
+    private Badge badge;
+}
+```
+
+Simple and flexible.
+
+---
+
+# 9. Avoid “God Classes”
+
+If one class controls everything:
+
+* It becomes impossible to maintain
+* Impossible to test
+* Dangerous to modify
+
+---
+
+# PisofMind Rule
+
+If a class exceeds:
+
+* 300+ lines
+* Too many dependencies
+* Too many methods
+
+split it.
+
+---
+
+# 10. Organize by Feature, Not by Type Only
+
+---
+
+# Better Structure
+
+```text id="i4k7ae"
+features/
+ ├── auth
+ ├── expenses
+ ├── budgets
+ └── gamification
+```
+
+---
+
+# Instead of Giant Shared Folders
+
+```text id="np4cza"
+controllers/
+services/
+repositories/
+```
+
+Feature grouping scales better.
+
+---
+
+# Backend Engineering Guide
+
+# Recommended Backend Structure
+
+```text id="rf3s18"
+com.pisofmind
+
+├── auth
+│   ├── controller
+│   ├── service
+│   ├── dto
+│   └── entity
+│
+├── expense
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── dto
+│   ├── entity
+│   └── mapper
+```
+
+---
+
+# Service Design Rules
+
+# GOOD SERVICE
+
+```java id="pys54q"
+ExpenseService
+```
+
+Responsibilities:
+
+* Create expense
+* Validate expense
+* Get expenses
+* Delete expense
+
+---
+
+# BAD SERVICE
+
+```java id="j5z3p5"
+SystemService
+```
+
+Too generic.
+
+---
+
+# Entity Design Guide
+
+Entities represent:
+
+* Database tables
+* Relationships
+* Persistent state
+
+NOT business workflows.
+
+---
+
+# GOOD ENTITY
+
+```java id="jm1wmf"
+@Entity
+class Expense {
+    private BigDecimal amount;
+}
+```
+
+---
+
+# BAD ENTITY
+
+```java id="jlwmcb"
+@Entity
+class Expense {
+
+    public void sendEmail() {}
+}
+```
+
+Entities should not send emails.
+
+---
+
+# Frontend Vibe Coding Guide
+
+# React Philosophy
+
+Frontend should:
+
+* Display data
+* Handle UI interaction
+* Call backend APIs
+
+NOT own business rules.
+
+---
+
+# BAD FRONTEND
+
+```typescript id="lb1bm0"
+if (expenses > budget * 0.75)
+```
+
+Business logic duplicated in frontend.
+
+---
+
+# GOOD FRONTEND
+
+```typescript id="zefijg"
+const summary = await api.getDashboardSummary();
+```
+
+Backend computes rules.
+
+---
+
+# React Component Rules
+
+# Components Should Be:
+
+* Small
+* Reusable
+* Focused
+* Predictable
+
+---
+
+# GOOD
+
+```text id="h6m8vs"
+ExpenseForm
+ExpenseList
+BudgetCard
+BadgeDisplay
+```
+
+---
+
+# BAD
+
+```text id="9z5eq4"
+DashboardEverythingComponent
+```
+
+---
+
+# State Management Philosophy
+
+For MVP:
+
+* Use Context API
+* Avoid Redux initially
+
+Keep state simple.
+
+---
+
+# Database Design Philosophy
+
+# Database Should Be:
+
+* Normalized enough
+* Simple
+* Predictable
+
+---
+
+# Avoid Early Complexity
+
+DO NOT ADD:
+
+* 50 tables
+* Audit systems
+* Event tables
+* Complex polymorphism
+
+during MVP.
+
+---
+
+# Recommended Design Patterns
+
+# REQUIRED
+
+| Pattern              | Why                  |
+| -------------------- | -------------------- |
+| Repository           | Database abstraction |
+| DTO                  | API separation       |
+| Dependency Injection | Loose coupling       |
+
+---
+
+# OPTIONAL LATER
+
+| Pattern  | Use             |
+| -------- | --------------- |
+| Strategy | Badge ranking   |
+| Factory  | Object creation |
+| Observer | Notifications   |
+
+---
+
+# Error Handling Philosophy
+
+# Good APIs Return Consistent Errors
+
+---
+
+# GOOD
+
+```json id="uqvr4k"
+{
+  "message": "Budget exceeded",
+  "status": 400
+}
+```
+
+---
+
+# BAD
+
+```json id="7ftk8j"
+{
+  "errorThing": "oops"
+}
+```
+
+---
+
+# Validation Philosophy
+
+Validate:
+
+* Early
+* Clearly
+* Consistently
+
+---
+
+# Backend Validation
+
+Use:
+
+* Jakarta Validation
+* DTO validation
+
+---
+
+# Example
+
+```java id="6eyz0f"
+@NotNull
+@Positive
+private BigDecimal amount;
+```
+
+---
+
+# Testing Philosophy
+
+# Focus on Testing:
+
+| Layer        | Priority |
+| ------------ | -------- |
+| Services     | HIGH     |
+| Controllers  | MEDIUM   |
+| Repositories | LOW      |
+
+---
+
+# Why?
+
+Business logic lives in services.
+
+---
+
+# Code Review Checklist
+
+Before merging code, ask:
+
+## Readability
+
+* Is this understandable quickly?
+
+## Responsibility
+
+* Does each class have ONE job?
+
+## Reusability
+
+* Can this be reused?
+
+## Simplicity
+
+* Is there a simpler approach?
+
+## Coupling
+
+* Are dependencies minimized?
+
+## Maintainability
+
+* Will this scale safely?
+
+---
+
+# PisofMind Engineering Standards
+
+# Backend Standards
+
+## MUST HAVE
+
+* DTOs
+* Service layer
+* Repository layer
+* Validation
+* JWT auth
+* Proper package structure
+
+---
+
+# Frontend Standards
+
+## MUST HAVE
+
+* Reusable components
+* Typed APIs
+* Feature grouping
+* Consistent state management
+
+---
+
+# PisofMind MVP Mentality
+
+# IMPORTANT
+
+The goal is NOT:
+
+* Perfect architecture
+* Enterprise complexity
+* Fancy patterns
+
+The goal IS:
+
+* Working system
+* Clean structure
+* Stable features
+* Easy maintenance
+* Easy future expansion
+
+---
+
+# Recommended Developer Mindset
+
+> “Build the simplest solution that is clean, understandable, and scalable enough for the next feature.”
+
+---
+
+# Final Engineering Rule
+
+For every class, ask:
+
+1. What is this class responsible for?
+2. Does it do too much?
+3. Can another developer understand it quickly?
+4. Is it easy to test?
+5. Is it tightly coupled?
+6. Can it scale safely?
+
+If the answer looks bad:
+
+* simplify
+* split responsibilities
+* reduce complexity
+
