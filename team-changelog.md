@@ -1,70 +1,54 @@
-Project Requirements 
-Committed : May 22, 2026
-Status - Done
-Succesfully created a low-level requirements for term project, context rules, and additional rules as well as flows.
+# PisofMind — Term Project Changelog
 
-PisofMind-TermProject
+---
 
-Backend Files
+## May 22, 2026 — Project Requirements
 
-dto's
-enums
-entities
-repositories
-services
-controllers
-exceptions
+### Docs: Low-level requirements
+Successfully defined low-level requirements for the term project including context rules, additional rules, and user flows.
+Status: Done
 
+---
 
-Created all the folders neccesary for both backend and frontend 
-Committed : June 2, 2026
-Status - Done 
-Successfully created all the folders to stores these classes and files
+## June 2, 2026 — Backend Files
 
-Committed Dto's files 
-Committed : June 2, 2026
-Status - Done
-Succesfully created all the files neccesary for dto's
+### Added: Project folder structure
+Successfully created all necessary directories for both backend and frontend modules.
+Includes: dto, enums, entities, repositories, services, controllers, exceptions
+Status: Done
 
-Committed enum's files
-Committed : June 3, 2026
-Status - Done
-Succesfully created all the files for enums (shared value types by entities, dto, and service)
+### Added: DTO files
+Successfully created all necessary files for Data Transfer Objects (DTOs).
+Status: Done
 
-Committed entitie's files
-Committed : June 3, 2026
-Status - Done
-Successfully created all the files for entites (Domain models)
+---
 
-Committed repositories files
-Committed : Jube 3, 2026
-Status - Done
-Succesfully created all the files for repositories (interfaces)
+## June 3, 2026 — Backend Files (continued)
 
-Committed services files 
-Committed : June 3, 2026
-Status : Done
-Succesfully creatd all files for services (Business logics to perform the process from dto, entities, and repositories)
+### Added: Enum files
+Successfully created all files for enums — shared value types used across entities, DTOs, and services.
+Status: Done
 
-Committed controllers files
-Committed : June 3, 2026 
-Status : Done
-Succesfully created all the files for repositories (API endpoints)
+### Added: Entity files
+Successfully created all files for entities — domain models of the application.
+Status: Done
 
-Committed exceptions files 
-Committed : June 3, 2026
-Status : Done
-Succesfully created all the files for exceptions (exception handler)
+### Added: Repository files
+Successfully created all files for repositories — interfaces for data access.
+Status: Done
 
-Committed configuration files 
-Committed : June 3, 2026 
-Status : Done 
-Succesfully created all the files for configurations (Security, CORS, profiles and other runtime configurations)
+### Added: Service files
+Successfully created all files for services — business logic handling processes across DTOs, entities, and repositories.
+Status: Done
 
+### Added: Controller files
+Successfully created all files for controllers — API endpoints of the application.
+Status: Done
 
+### Added: Exception files
+Successfully created all files for exceptions — centralized exception handlers.
+Status: Done
 
-
-
-
-
-
+### Added: Configuration files
+Successfully created all files for configurations — covers security, CORS, profiles, and other runtime configurations.
+Status: Done
