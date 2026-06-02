@@ -1,0 +1,1 @@
+import java.sql.Connection; import java.sql.DriverManager; import java.sql.Statement; try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres"); Statement stmt = conn.createStatement()) { stmt.executeUpdate("CREATE DATABASE pisofmind"); System.out.println("DB created"); } catch (Exception e) { e.printStackTrace(); }
