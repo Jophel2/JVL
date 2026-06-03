@@ -22,6 +22,8 @@ Status: Done
 ### Added: DTO files
 Successfully created all necessary files for Data Transfer Objects (DTOs).
 
+Includes: AddExpenseRequest.java, AuthResponse.java,  BudgetResponse.java,  CategoryBudgetResponse.java,  ExpenseResponse.java,  LoginRequest.java,  LoginResponse.java,  RegisterRequest.java,  SetBudgetRequest.java
+
 Status: Done
 
 ---
@@ -31,35 +33,49 @@ Status: Done
 ### Added: Enum files
 Successfully created all files for enums — shared value types used across entities, DTOs, and services.
 
+Includes: BudgetPeriod.java, ExpenseCategory.java, UserRank.java
+
 Status: Done
 
 ### Added: Entity files
 Successfully created all files for entities — domain models of the application.
+
+Includes: CategoryBudget.java, ExpenseCategory.java, UserRank.java
 
 Status: Done
 
 ### Added: Repository files
 Successfully created all files for repositories — interfaces for data access.
 
+Includes: CategoryBudgetRepository.java, Expense.java, User.java
+
 Status: Done
 
 ### Added: Service files
 Successfully created all files for services — business logic handling processes across DTOs, entities, and repositories.
+
+Includes: AuthService.java, BudgetServicePort.java, ExpenseService.java, RankService.java, SummaryService.java
 
 Status: Done
 
 ### Added: Controller files
 Successfully created all files for controllers — API endpoints of the application.
 
+Includes: AuthController.java, BugdetController.java, ExpenseController.java, SummaryController.java
+
 Status: Done
 
 ### Added: Exception files
 Successfully created all files for exceptions — centralized exception handlers.
 
+Includes: ErrorResponse.java, GlobalExceptionHandler.java
+
 Status: Done
 
 ### Added: Configuration files
 Successfully created all files for configurations — covers security, CORS, profiles, and other runtime configurations.
+
+Includes: SecurityConfig.java
 
 Status: Done
 
