@@ -63,6 +63,41 @@ Successfully created all files for configurations — covers security, CORS, pro
 
 Status: Done
 
+### Added: Properties files and DB migration folder
+Successfully created all files for properties and sql
+
+Includes: application.properties, application-h2.properties, V1__Create_Users_Table, V2__Create_Category_Budget_Table, V3__Add_budget_period_to_category_budgets
+
+Status: Done
+
+### Added: maven files
+Successfully created all maven files.
+
+Includes pom.xml, mvnw, mvnw.cmd
+
+Status: Done
+
+### Added: Guide files
+Successfully created all files for guides
+
+Includes create_bd.jsh, DB_SETUP_GUIDE.md, HELP.md
+
+Status: Done
+
+### Added: Project Requirements file
+Successfully created all files for the guide to the requirements of the project
+
+Includes Project Requirements.txt
+
+Status: Done
+
+### Added: Context Rules file
+Successfully created all files that contains the rules to be followed
+
+Includes Context-rules.txt, Additional-Rules-and-Flows.txt
+
+Status: Done
+
 ---
 
 ## June 3, 2026 — Frontend Files
